@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.vm93.registroelettronico.auth.entity.ERole;
@@ -37,6 +38,7 @@ public class AdminConfig {
 	private String password;
 
 	@Bean
+	@Scope("prototype")
 	public User adminGenerator() {
 		PasswordEncoder pe = new BCryptPasswordEncoder();
 		User u = new User();
