@@ -22,6 +22,6 @@ public class Studente extends User {
 	@ManyToMany(mappedBy = "studenti")
 	private List<Corso> corsi;
 	
-	@ManyToMany(mappedBy = "studenti")
+	@ManyToMany(mappedBy = "presenze")
 	private List<Lezione> lezioni;
 }

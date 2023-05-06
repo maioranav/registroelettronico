@@ -3,19 +3,35 @@ package org.vm93.registroelettronico.model;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Entity
+@Table(name = "plessi")
+@NoArgsConstructor
+@AllArgsConstructor
+@Data @Builder
 public class Plesso {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long id;
+	private Long id;
     
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	public List<Corso> corsi;
+    @Column(nullable = false)
+    private String name;
+    
+    @OneToMany(mappedBy = "plesso")
+    private List<Corso> corsi;
 	
 }

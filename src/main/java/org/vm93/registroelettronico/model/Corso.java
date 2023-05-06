@@ -2,12 +2,12 @@ package org.vm93.registroelettronico.model;
 
 import java.util.List;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,10 +25,10 @@ public class Corso {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
     
-    @Column(nullable = false)
+    @ManyToOne
 	private Plesso plesso;
 	
-    @Column(nullable = false)
+    @ManyToOne
 	private Docente docente;
     
     @ManyToMany(mappedBy = "corso")
