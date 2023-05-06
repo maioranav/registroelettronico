@@ -1,0 +1,25 @@
+package org.vm93.registroelettronico.model;
+
+import java.util.List;
+
+import org.vm93.registroelettronico.auth.entity.User;
+
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@DiscriminatorValue("Docente")
+@NoArgsConstructor
+@AllArgsConstructor
+@Data @Builder
+public class Docente extends User {
+	
+	@ManyToMany(mappedBy = "docente")
+	private List<Corso> corsi;
+
+}
