@@ -1,6 +1,5 @@
 package org.vm93.registroelettronico.auth.payload;
 
-import java.util.Set;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,5 +18,5 @@ public class RegisterDto {
     private String email;
     private String password;
  // Per registrare tutti come USER di Default commentare roles
-    private Set<String> roles;
+  //  private Set<String> roles;
 }
