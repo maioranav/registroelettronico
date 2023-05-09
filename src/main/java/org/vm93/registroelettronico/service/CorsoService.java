@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.vm93.registroelettronico.model.Corso;
+import org.vm93.registroelettronico.model.Docente;
 import org.vm93.registroelettronico.model.Studente;
 import org.vm93.registroelettronico.repo.CorsoRepository;
 
@@ -55,6 +56,10 @@ public class CorsoService {
 		}
 		repo.deleteById(id);
 		return "Corso eliminato dal DB";
+	}
+	
+	public Corso getRandom() {
+		return repo.getRandom();
 	}
 	
 }
