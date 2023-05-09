@@ -35,6 +35,10 @@ public class StudenteService {
 		repo.save(d);
 		return d;
 	}
+	
+	public Studente getRandom() {
+		return repo.getRandom();
+	}
 
 	
 }

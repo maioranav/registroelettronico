@@ -38,5 +38,9 @@ public class DocenteService {
 		repo.save(d);
 		return d;
 	}
+	
+	public Docente getRandom() {
+		return repo.getRandom();
+	}
 
 }

@@ -35,4 +35,8 @@ public class PlessoService {
 		repo.save(d);
 		return d;
 	}
+	
+	public Plesso getRandom() {
+		return repo.getRandom();
+	}
 }
