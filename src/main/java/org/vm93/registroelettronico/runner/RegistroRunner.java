@@ -18,6 +18,7 @@ import org.vm93.registroelettronico.auth.repository.UserRepository;
 import org.vm93.registroelettronico.auth.service.AdminService;
 import org.vm93.registroelettronico.auth.service.AuthService;
 import org.vm93.registroelettronico.service.DocenteService;
+import org.vm93.registroelettronico.service.PlessoService;
 import org.vm93.registroelettronico.service.StudenteService;
 
 @Component
@@ -33,6 +34,7 @@ public class RegistroRunner implements ApplicationRunner {
 	
 	@Autowired DocenteService docenteService;
 	@Autowired StudenteService studenteService;
+	@Autowired PlessoService plessoService;
 	
 
 	@Override 
@@ -41,6 +43,7 @@ public class RegistroRunner implements ApplicationRunner {
 		//adminService.salvaAdmin();
 		//docenteService.generaFakeDocente();
 		studenteService.generaFakeStudente();
+		plessoService.generaFakePlesso();
 		
 
 	}
