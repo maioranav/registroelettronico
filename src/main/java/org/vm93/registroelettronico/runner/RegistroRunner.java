@@ -18,30 +18,29 @@ import org.vm93.registroelettronico.auth.repository.UserRepository;
 import org.vm93.registroelettronico.auth.service.AdminService;
 import org.vm93.registroelettronico.auth.service.AuthService;
 import org.vm93.registroelettronico.service.DocenteService;
+import org.vm93.registroelettronico.service.StudenteService;
 
 @Component
 public class RegistroRunner implements ApplicationRunner {
 
 	@Autowired	RoleRepository roleRepository;
-
 	@Autowired	UserRepository userRepository;
-
 	@Autowired	PasswordEncoder passwordEncoder;
-
 	@Autowired	AuthService authService;
-	
 	@Autowired	AdminService adminService;
-	
-	@Autowired DocenteService docenteService;
-	
 	private static Set<Role> adminRole;
 	private static Set<Role> userRole;
+	
+	@Autowired DocenteService docenteService;
+	@Autowired StudenteService studenteService;
+	
 
 	@Override 
 	public void run(ApplicationArguments args) throws Exception {
 		//setRoleDefault();
 		//adminService.salvaAdmin();
-		docenteService.generaFakeDocente();
+		//docenteService.generaFakeDocente();
+		studenteService.generaFakeStudente();
 		
 
 	}
