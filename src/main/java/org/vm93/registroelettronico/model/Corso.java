@@ -25,6 +25,8 @@ public class Corso {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
     
+    private String name;
+    
     @ManyToOne
 	private Plesso plesso;
 	
