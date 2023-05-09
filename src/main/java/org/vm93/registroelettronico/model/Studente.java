@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.vm93.registroelettronico.auth.entity.User;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
@@ -17,6 +19,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data @Builder
+@JsonIgnoreProperties({"password", "roles"})
 public class Studente extends User {
 
 	@ManyToMany(mappedBy = "studenti")
