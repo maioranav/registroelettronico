@@ -28,4 +28,10 @@ public class DocenteController {
 		return new ResponseEntity<Page<Docente>>(service.getAllDocenti(pageable), HttpStatus.OK);
 	}
 	
+	@GetMapping("/random")
+	@PreAuthorize("isAuthenticated()")
+	public ResponseEntity<?> getRandom() {
+		return new ResponseEntity<>(service.getRandom(), HttpStatus.OK);
+	}
+	
 }

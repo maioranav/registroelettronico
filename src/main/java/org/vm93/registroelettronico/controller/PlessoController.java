@@ -24,5 +24,10 @@ public class PlessoController {
 		return new ResponseEntity<>(service.getAllPlessi(pageable), HttpStatus.OK);
 	}
 	
+	@GetMapping("/random")
+	@PreAuthorize("isAuthenticated()")
+	public ResponseEntity<?> getRandom() {
+		return new ResponseEntity<>(service.getRandom(), HttpStatus.OK);
+	}
 
 }

@@ -25,4 +25,10 @@ public class StudenteController {
 	public ResponseEntity<?> getAll(Pageable pageable) {
 		return new ResponseEntity<Page<Studente>>(service.getAllStudenti(pageable), HttpStatus.OK);
 	}
+	
+	@GetMapping("/random")
+	@PreAuthorize("isAuthenticated()")
+	public ResponseEntity<?> getRandom() {
+		return new ResponseEntity<>(service.getRandom(), HttpStatus.OK);
+	}
 }
