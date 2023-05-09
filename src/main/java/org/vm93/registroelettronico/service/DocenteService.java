@@ -8,9 +8,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.vm93.registroelettronico.model.Docente;
+import org.vm93.registroelettronico.model.Studente;
 import org.vm93.registroelettronico.repo.DocenteRepository;
 
 import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 
 
 @Service
@@ -38,9 +40,31 @@ public class DocenteService {
 		repo.save(d);
 		return d;
 	}
+	public Docente updateDocente(Docente d) {
+		if (d.getId() == null && !repo.existsById(d.getId())) {
+			throw new EntityExistsException("Non puoi aggiornare questo Docente (non esiste o non hai fornito un id valido");
+		}
+		repo.save(d);
+		return d;
+	}
 	
 	public Docente getRandom() {
 		return repo.getRandom();
+	}
+	
+	public Docente findById(Long id) {
+		if (!repo.existsById(id)) {
+			throw new EntityExistsException("ID NON VALIDO");
+		}
+		return repo.findById(id).get();
+	}
+	
+	public String deleteDocente(Long id) {
+		if (!repo.existsById(id)) {
+			throw new EntityNotFoundException("L'id inserito non esiste");
+		}
+		repo.deleteById(id);
+		return "Docente eliminato dal DB";
 	}
 
 }

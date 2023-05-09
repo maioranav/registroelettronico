@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.vm93.registroelettronico.model.Corso;
+import org.vm93.registroelettronico.model.Studente;
 import org.vm93.registroelettronico.repo.CorsoRepository;
 
 import jakarta.persistence.EntityExistsException;
@@ -32,6 +33,20 @@ public class CorsoService {
 		}
 		repo.save(c);
 		return c;
+	}
+	public Corso updateCorso(Corso c) {
+		if (c.getId() == null && !repo.existsById(c.getId())) {
+			throw new EntityExistsException("Non puoi aggiornare questo Corso (non esiste o non hai fornito un id valido");
+		}
+		repo.save(c);
+		return c;
+	}
+	
+	public Corso findById(Long id) {
+		if (!repo.existsById(id)) {
+			throw new EntityExistsException("ID NON VALIDO");
+		}
+		return repo.findById(id).get();
 	}
 	
 	public String deleteCorso(Long id) {

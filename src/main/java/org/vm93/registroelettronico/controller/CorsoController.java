@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.vm93.registroelettronico.model.Corso;
 import org.vm93.registroelettronico.service.CorsoService;
 
 @CrossOrigin(origins =  "*", maxAge = 360000)
@@ -24,6 +28,22 @@ public class CorsoController {
 	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<?> getAll(Pageable pageable) {
 		return new ResponseEntity<>(service.getAllCorsi(pageable), HttpStatus.OK);
+	}
+	
+	@GetMapping("/{id}")
+	@PreAuthorize("isAuthenticated()")
+	public ResponseEntity<?> getRandom(@PathVariable Long id) {
+		return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
+	}
+	
+	@PostMapping
+	public ResponseEntity<?> postCorso(@RequestBody Corso c){
+		return new ResponseEntity<>(service.saveCorso(c), HttpStatus.CREATED);
+	}
+	
+	@PutMapping
+	public ResponseEntity<?> putCorso(@RequestBody Corso c){
+		return new ResponseEntity<>(service.updateCorso(c), HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/{id}")

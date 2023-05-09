@@ -10,6 +10,7 @@ import org.vm93.registroelettronico.model.Studente;
 import org.vm93.registroelettronico.repo.StudenteRepository;
 
 import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 @Service
 public class StudenteService {
 
@@ -36,8 +37,31 @@ public class StudenteService {
 		return d;
 	}
 	
+	public Studente updateStudente(Studente d) {
+		if (d.getId() == null && !repo.existsById(d.getId())) {
+			throw new EntityExistsException("Non puoi aggiornare questo Studente (non esiste o non hai fornito un id valido.)");
+		}
+		repo.save(d);
+		return d;
+	}
+	
 	public Studente getRandom() {
 		return repo.getRandom();
+	}
+	
+	public Studente findById(Long id) {
+		if (!repo.existsById(id)) {
+			throw new EntityExistsException("ID NON VALIDO");
+		}
+		return repo.findById(id).get();
+	}
+	
+	public String deleteStudente(Long id) {
+		if (!repo.existsById(id)) {
+			throw new EntityNotFoundException("L'id inserito non esiste");
+		}
+		repo.deleteById(id);
+		return "Studente eliminato dal DB";
 	}
 
 	
