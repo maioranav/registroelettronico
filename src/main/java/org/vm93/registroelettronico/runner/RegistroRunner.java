@@ -44,11 +44,10 @@ public class RegistroRunner implements ApplicationRunner {
 		//setRoleDefault();
 		//adminService.salvaAdmin();
 		//docenteService.generaFakeDocente();
-			studenteService.generaFakeStudente();
+		//studenteService.generaFakeStudente();
 		//plessoService.generaFakePlesso();
-		for (int i = 0; i < 10; i++) {
 		//corsoService.generaFakeCorso();
-		}
+		
 	}
 
 	private void setRoleDefault() {
