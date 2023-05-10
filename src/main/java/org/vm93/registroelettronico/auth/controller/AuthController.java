@@ -46,13 +46,6 @@ public class AuthController {
 		return ResponseEntity.ok(jwtAuthResponse);
 	}
 
-	// Build Register REST API
-	@PostMapping(value = { "/register", "/signup" })
-	public ResponseEntity<String> register(@RequestBody RegisterDto registerDto) {
-		String response = authService.register(registerDto);
-		return new ResponseEntity<>(response, HttpStatus.CREATED);
-	}
-
 	@GetMapping("/profile")
 	public ResponseEntity<?> getProfile() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
