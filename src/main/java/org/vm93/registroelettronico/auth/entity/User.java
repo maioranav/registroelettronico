@@ -3,6 +3,8 @@ package org.vm93.registroelettronico.auth.entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
@@ -32,6 +34,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @Entity
+@JsonIgnoreProperties(value={"password", "roles"}, allowSetters= true)
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING, name = "UserType")
 @Table(name = "users", uniqueConstraints = { @UniqueConstraint(columnNames = "username"),
