@@ -43,6 +43,11 @@ public class StudenteController {
 	public ResponseEntity<?> getRandom(@PathVariable Long id) {
 		return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
 	}
+	@GetMapping("/corsi/{id}")
+	@PreAuthorize("isAuthenticated()")
+	public ResponseEntity<?> getByCorsi(@PathVariable Long id) {
+		return new ResponseEntity<>(service.getByCorsi(id), HttpStatus.OK);
+	}
 	
 	@PostMapping
 	public ResponseEntity<?> postStudente(@RequestBody Studente s){

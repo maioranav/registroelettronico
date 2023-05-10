@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.vm93.registroelettronico.auth.entity.User;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.DiscriminatorValue;
@@ -22,6 +23,7 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties({"password", "roles"})
 public class Docente extends User {
 	
+	@JsonIgnore
 	@ManyToMany(mappedBy = "docente")
 	private List<Corso> corsi;
 
