@@ -2,6 +2,7 @@ package org.vm93.registroelettronico.model;
 
 import java.util.List;
 
+import org.springframework.security.core.Transient;
 import org.vm93.registroelettronico.auth.entity.User;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -16,11 +17,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Transient
 @DiscriminatorValue("Studente")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data @Builder
-@JsonIgnoreProperties({"password", "roles"})
+@JsonIgnoreProperties(value={"password", "roles"}, allowSetters= true)
 public class Studente extends User {
 
 	@ManyToMany(mappedBy = "studenti" ,fetch = FetchType.LAZY)

@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data @Builder
-@JsonIgnoreProperties({"password", "roles"})
+@JsonIgnoreProperties(value={"password", "roles"}, allowSetters= true)
 public class Docente extends User {
 	
 	@JsonIgnore
