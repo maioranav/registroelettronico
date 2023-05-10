@@ -18,46 +18,46 @@ import org.vm93.registroelettronico.auth.payload.RegisterDto;
 import org.vm93.registroelettronico.auth.repository.UserRepository;
 import org.vm93.registroelettronico.auth.service.AuthService;
 
-@CrossOrigin(origins =  "*", maxAge = 360000)
+@CrossOrigin(origins = "*", maxAge = 360000)
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
 
-  private AuthService authService;
-  
-  @Autowired UserRepository userRepo;
+	private AuthService authService;
 
-  public AuthController(AuthService authService) {
-    this.authService = authService;
-  }
+	@Autowired
+	UserRepository userRepo;
 
-  // Build Login REST API
-  @PostMapping(value = { "/login", "/signin" })
-  public ResponseEntity<JWTAuthResponse> login(@RequestBody LoginDto loginDto) {
-    String token = authService.login(loginDto);
-    JWTAuthResponse jwtAuthResponse = new JWTAuthResponse();
-    User u = userRepo.findByUsername(loginDto.getUsername()).get();
-    jwtAuthResponse.setUsername(loginDto.getUsername());
-    jwtAuthResponse.setAccessToken(token);
-   jwtAuthResponse.setRole(u.getRoles());
-   jwtAuthResponse.setUserType(u.getClass().getSimpleName());
-   
+	public AuthController(AuthService authService) {
+		this.authService = authService;
+	}
 
-    return ResponseEntity.ok(jwtAuthResponse);
-  }
+	// Build Login REST API
+	@PostMapping(value = { "/login", "/signin" })
+	public ResponseEntity<JWTAuthResponse> login(@RequestBody LoginDto loginDto) {
+		String token = authService.login(loginDto);
+		JWTAuthResponse jwtAuthResponse = new JWTAuthResponse();
+		User u = userRepo.findByUsername(loginDto.getUsername()).get();
+		jwtAuthResponse.setUsername(loginDto.getUsername());
+		jwtAuthResponse.setAccessToken(token);
+		jwtAuthResponse.setRole(u.getRoles());
+		jwtAuthResponse.setUserType(u.getClass().getSimpleName());
 
-  // Build Register REST API
-  @PostMapping(value = { "/register", "/signup" })
-  public ResponseEntity<String> register(@RequestBody RegisterDto registerDto) {
-    String response = authService.register(registerDto);
-    return new ResponseEntity<>(response, HttpStatus.CREATED);
-  }
-  
-  @GetMapping("/profile")
-  public ResponseEntity<?> getProfile() {
-	  Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	  User u = userRepo.findByEmail(auth.getName()).get();
-	  return new ResponseEntity<>(u, HttpStatus.OK);
-  }
-  
+		return ResponseEntity.ok(jwtAuthResponse);
+	}
+
+	// Build Register REST API
+	@PostMapping(value = { "/register", "/signup" })
+	public ResponseEntity<String> register(@RequestBody RegisterDto registerDto) {
+		String response = authService.register(registerDto);
+		return new ResponseEntity<>(response, HttpStatus.CREATED);
+	}
+
+	@GetMapping("/profile")
+	public ResponseEntity<?> getProfile() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User u = userRepo.findByEmail(auth.getName()).get();
+		return new ResponseEntity<>(u, HttpStatus.OK);
+	}
+
 }
