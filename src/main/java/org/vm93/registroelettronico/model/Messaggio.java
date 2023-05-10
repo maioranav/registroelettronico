@@ -27,8 +27,8 @@ public class Messaggio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
     
-    @Column(nullable = false)
-	private String msg;
+    @Column(nullable = false, columnDefinition="TEXT")
+    private String msg;
     
     @OneToOne
 	private Docente docente;
