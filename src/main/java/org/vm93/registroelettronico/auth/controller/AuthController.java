@@ -3,7 +3,10 @@ package org.vm93.registroelettronico.auth.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,4 +52,12 @@ public class AuthController {
     String response = authService.register(registerDto);
     return new ResponseEntity<>(response, HttpStatus.CREATED);
   }
+  
+  @GetMapping("/profile")
+  public ResponseEntity<?> getProfile() {
+	  Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	  User u = userRepo.findByEmail(auth.getName()).get();
+	  return new ResponseEntity<>(u, HttpStatus.OK);
+  }
+  
 }
