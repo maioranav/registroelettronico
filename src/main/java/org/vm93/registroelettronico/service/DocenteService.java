@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.vm93.registroelettronico.model.Docente;
@@ -37,6 +39,8 @@ public class DocenteService {
 		if (d.getId() != null && repo.existsById(d.getId())) {
 			throw new EntityExistsException("Non puoi salvere un id, utilizza il metodo PUT per modificare");
 		}
+		PasswordEncoder pe = new BCryptPasswordEncoder();
+		d.setPassword(pe.encode(d.getPassword()));
 		repo.save(d);
 		return d;
 	}
@@ -44,6 +48,11 @@ public class DocenteService {
 		if (d.getId() == null && !repo.existsById(d.getId())) {
 			throw new EntityExistsException("Non puoi aggiornare questo Docente (non esiste o non hai fornito un id valido");
 		}
+		if (d.getPassword() == null) {
+			throw new EntityExistsException("Non puoi aggiornare questo Studente se non fornisci una password");
+		}
+		PasswordEncoder pe = new BCryptPasswordEncoder();
+		d.setPassword(pe.encode(d.getPassword()));
 		repo.save(d);
 		return d;
 	}
