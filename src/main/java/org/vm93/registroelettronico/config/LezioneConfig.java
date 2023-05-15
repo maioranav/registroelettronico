@@ -29,10 +29,9 @@ public class LezioneConfig {
 		Faker fake = Faker.instance(new Locale("it-IT"));
 		Lezione l = new Lezione();
 		l.setCorso(corsoServ.getRandom());
-		Date d = fake.date().between(new Date(2022, 1, 5), new Date(2023, 5, 5));
+		Date d = fake.date().between(new Date(123, 1, 5), new Date(124, 5, 5));
 		LocalDate d2 = new java.sql.Date(d.getTime()).toLocalDate();
 		l.setData(d2);
-		l.setNome("Lezione incognita");
 		List<Studente> list = new ArrayList<>();
 		for (int i = 0; i <5; i++) {			
 			list.add(studServ.getRandom());

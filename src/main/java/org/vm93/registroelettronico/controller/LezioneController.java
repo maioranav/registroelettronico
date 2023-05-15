@@ -38,6 +38,12 @@ public class LezioneController {
 		return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
 	}
 	
+	@GetMapping("/corsi/{id}")
+	@PreAuthorize("isAuthenticated()")
+	public ResponseEntity<?> getByCorsi(@PathVariable Long id) {
+		return new ResponseEntity<>(service.getByCorsi(id), HttpStatus.OK);
+	}
+	
 	@PostMapping
 	public ResponseEntity<?> postCorso(@RequestBody Lezione c){
 		return new ResponseEntity<>(service.saveLezione(c), HttpStatus.CREATED);

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -24,6 +25,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "lezioni")
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties("lezioni")
 @Data @Builder
 public class Lezione {
 
@@ -32,16 +34,13 @@ public class Lezione {
 	private Long id;
     
     @Column(nullable=false)
-	private String nome;
-    
-    @Column(nullable=false)
 	private LocalDate data;
     
     @ManyToMany
 	private List<Studente> presenze;
 	
     
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	private Corso corso;
 	
 }

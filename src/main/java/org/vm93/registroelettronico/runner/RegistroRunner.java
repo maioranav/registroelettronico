@@ -19,6 +19,7 @@ import org.vm93.registroelettronico.auth.service.AdminService;
 import org.vm93.registroelettronico.auth.service.AuthService;
 import org.vm93.registroelettronico.service.CorsoService;
 import org.vm93.registroelettronico.service.DocenteService;
+import org.vm93.registroelettronico.service.LezioneService;
 import org.vm93.registroelettronico.service.PlessoService;
 import org.vm93.registroelettronico.service.StudenteService;
 
@@ -37,6 +38,7 @@ public class RegistroRunner implements ApplicationRunner {
 	@Autowired StudenteService studenteService;
 	@Autowired PlessoService plessoService;
 	@Autowired CorsoService corsoService;
+	@Autowired LezioneService lezioneService;
 	
 
 	@Override 
@@ -47,6 +49,7 @@ public class RegistroRunner implements ApplicationRunner {
 		//studenteService.generaFakeStudente();
 		//plessoService.generaFakePlesso();
 		//corsoService.generaFakeCorso();
+		//lezioneService.generaFakeLezione();
 		
 	}
 

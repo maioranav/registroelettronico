@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data @Builder
-@JsonIgnoreProperties(value={"password", "roles"}, allowSetters= true)
+@JsonIgnoreProperties(value={"password", "roles", "lezioni"}, allowSetters= true)
 public class Studente extends User {
 
 	@ManyToMany(mappedBy = "studenti" ,fetch = FetchType.LAZY)
