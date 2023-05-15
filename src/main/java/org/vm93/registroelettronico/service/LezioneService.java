@@ -1,5 +1,6 @@
 package org.vm93.registroelettronico.service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,6 +76,10 @@ public class LezioneService {
 		List<Corso> list = new ArrayList<>();
 		list.add(c);
 		return (List<Lezione>) repo.findAllByCorsoIn(list);
+	}
+	
+	public List<Lezione> getByCorsieData(List<Corso> c, LocalDate d) {
+		return (List<Lezione>) repo.searchByCorsoEDopoData(c, d);
 	}
 	
 }

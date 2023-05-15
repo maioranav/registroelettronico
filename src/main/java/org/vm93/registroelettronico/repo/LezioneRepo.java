@@ -1,5 +1,6 @@
 package org.vm93.registroelettronico.repo;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
@@ -15,4 +16,8 @@ public interface LezioneRepo extends PagingAndSortingRepository<Lezione, Long>, 
 	public Lezione getRandom();
 	
 	List<Lezione> findAllByCorsoIn(List<Corso> corsi);
+	
+	
+	@Query("SELECT l FROM Lezione l WHERE l.data > :data AND l.corso IN :corsi ORDER BY l.data ASC")
+	List<Lezione> searchByCorsoEDopoData(List<Corso> corsi, LocalDate data);
 }

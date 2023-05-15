@@ -1,5 +1,8 @@
 package org.vm93.registroelettronico.controller;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -42,6 +45,12 @@ public class LezioneController {
 	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<?> getByCorsi(@PathVariable Long id) {
 		return new ResponseEntity<>(service.getByCorsi(id), HttpStatus.OK);
+	}
+	
+	@PostMapping("/calendario/{data}")
+	@PreAuthorize("isAuthenticated()")
+	public ResponseEntity<?> getByCorsieData(@RequestBody List<Corso> c, @PathVariable LocalDate data) {
+		return new ResponseEntity<>(service.getByCorsieData(c, data), HttpStatus.OK);
 	}
 	
 	@PostMapping

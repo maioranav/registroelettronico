@@ -32,9 +32,13 @@ public class Lezione {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-    
+
     @Column(nullable=false)
 	private LocalDate data;
+    
+
+    @Column(nullable=false)
+	private Integer orario;
     
     @ManyToMany
 	private List<Studente> presenze;

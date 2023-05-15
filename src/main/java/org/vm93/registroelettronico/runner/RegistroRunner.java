@@ -51,6 +51,7 @@ public class RegistroRunner implements ApplicationRunner {
 		//corsoService.generaFakeCorso();
 		//lezioneService.generaFakeLezione();
 		
+		
 	}
 
 	private void setRoleDefault() {

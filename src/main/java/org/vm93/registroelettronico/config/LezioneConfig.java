@@ -31,6 +31,7 @@ public class LezioneConfig {
 		l.setCorso(corsoServ.getRandom());
 		Date d = fake.date().between(new Date(123, 1, 5), new Date(124, 5, 5));
 		LocalDate d2 = new java.sql.Date(d.getTime()).toLocalDate();
+		l.setOrario(fake.number().numberBetween(8, 19));
 		l.setData(d2);
 		List<Studente> list = new ArrayList<>();
 		for (int i = 0; i <5; i++) {			
