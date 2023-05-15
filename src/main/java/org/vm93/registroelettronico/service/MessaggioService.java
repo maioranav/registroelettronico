@@ -1,11 +1,16 @@
 package org.vm93.registroelettronico.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.vm93.registroelettronico.model.Corso;
+import org.vm93.registroelettronico.model.Lezione;
 import org.vm93.registroelettronico.model.Messaggio;
 import org.vm93.registroelettronico.repo.MessaggioRepo;
 
@@ -55,6 +60,10 @@ public class MessaggioService {
 		}
 		repo.deleteById(id);
 		return "Corso eliminato dal DB";
+	}
+	
+	public Page<Messaggio> getByCorsi(List<Corso> corsi, Pageable pageable) {
+		return (Page<Messaggio>) repo.findAllByCorsoIn(corsi, pageable);
 	}
 	
 }
