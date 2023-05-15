@@ -3,7 +3,6 @@ package org.vm93.registroelettronico.model;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -35,6 +34,7 @@ public class Corso {
 	private Plesso plesso;
 	
     @ManyToOne
+    @JsonIgnore
 	private Docente docente;
     
     @ManyToMany(mappedBy = "corso", fetch = FetchType.LAZY)

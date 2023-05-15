@@ -1,6 +1,8 @@
 package org.vm93.registroelettronico.model;
 
 
+import java.time.LocalDate;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -33,6 +35,9 @@ public class Messaggio {
     @OneToOne
 	private Docente docente;
     
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @Column(nullable = false)
+    private LocalDate data;
+    
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	private Corso corso;
 }

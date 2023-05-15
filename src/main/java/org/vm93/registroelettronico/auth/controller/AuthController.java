@@ -3,6 +3,7 @@ package org.vm93.registroelettronico.auth.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,6 +18,12 @@ import org.vm93.registroelettronico.auth.payload.LoginDto;
 import org.vm93.registroelettronico.auth.payload.RegisterDto;
 import org.vm93.registroelettronico.auth.repository.UserRepository;
 import org.vm93.registroelettronico.auth.service.AuthService;
+import org.vm93.registroelettronico.model.Docente;
+
+import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.databind.ser.FilterProvider;
+import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
+import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 
 @CrossOrigin(origins = "*", maxAge = 360000)
 @RestController
@@ -49,8 +56,11 @@ public class AuthController {
 	@GetMapping("/profile")
 	public ResponseEntity<?> getProfile() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		User u = userRepo.findByEmail(auth.getName()).get();
-		return new ResponseEntity<>(u, HttpStatus.OK);
+		User usercomplete = userRepo.findByEmail(auth.getName()).get();
+		return new ResponseEntity<>(usercomplete, HttpStatus.OK);
+		
+
+		
 	}
 
 }
