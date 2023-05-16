@@ -82,4 +82,8 @@ public class LezioneService {
 		return (List<Lezione>) repo.searchByCorsoEDopoData(c, d);
 	}
 	
+	public List<Lezione> getByDopoData(LocalDate d) {
+		return (List<Lezione>) repo.searchByDopoData(d);
+	}
+	
 }
