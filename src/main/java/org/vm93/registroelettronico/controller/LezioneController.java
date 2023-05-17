@@ -83,6 +83,20 @@ public class LezioneController {
 		return new ResponseEntity<>(service.getByData(data), HttpStatus.OK);
 	}
 	
+	@GetMapping("/last7")
+	@PreAuthorize("isAuthenticated()")
+	public ResponseEntity<?> getLast7() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		User usercomplete = userRepo.findByEmail(auth.getName()).get();
+		if (usercomplete.getClass().getSimpleName().equals("Docente")) {
+			return new ResponseEntity<>(service.getLast7DaysSpecific(((Docente) usercomplete).getCorsi()), HttpStatus.OK);
+		}
+		if (usercomplete.getClass().getSimpleName().equals("Studente")) {
+			return new ResponseEntity<>(service.getLast7DaysSpecific(((Studente) usercomplete).getCorsi() ), HttpStatus.OK);
+		}
+		return new ResponseEntity<>(service.getLast7Days(), HttpStatus.OK);
+	}
+	
 	@PostMapping
 	public ResponseEntity<?> postCorso(@RequestBody Lezione c){
 		return new ResponseEntity<>(service.saveLezione(c), HttpStatus.CREATED);

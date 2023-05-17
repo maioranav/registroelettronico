@@ -18,6 +18,7 @@ import org.vm93.registroelettronico.repo.LezioneRepo;
 
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 public class LezioneService {
@@ -92,6 +93,18 @@ public class LezioneService {
 	
 	public List<Lezione> getByData(LocalDate d) {
 		return (List<Lezione>) repo.searchByData(d);
+	}
+	
+	public List<Lezione> getLast7Days() {
+		LocalDate start = LocalDate.now().minusDays(1);
+		LocalDate end = LocalDate.now().minusDays(8);
+		return (List<Lezione>) repo.search7daysBefore(start, end);
+	}
+	
+	public List<Lezione> getLast7DaysSpecific(List<Corso> c) {
+		LocalDate start = LocalDate.now();
+		LocalDate end = start.minusDays(7);
+		return (List<Lezione>) repo.search7daysBeforeCorso(c, start, end);
 	}
 	
 }
