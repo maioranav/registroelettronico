@@ -59,6 +59,12 @@ public class LezioneController {
 		return new ResponseEntity<>(service.getByDopoData(data), HttpStatus.OK);
 	}
 	
+	@GetMapping("/data/{data}")
+	@PreAuthorize("isAuthenticated()")
+	public ResponseEntity<?> getByData(@PathVariable LocalDate data) {
+		return new ResponseEntity<>(service.getByData(data), HttpStatus.OK);
+	}
+	
 	@PostMapping
 	public ResponseEntity<?> postCorso(@RequestBody Lezione c){
 		return new ResponseEntity<>(service.saveLezione(c), HttpStatus.CREATED);

@@ -23,4 +23,7 @@ public interface LezioneRepo extends PagingAndSortingRepository<Lezione, Long>, 
 	
 	@Query("SELECT l FROM Lezione l WHERE l.data > :data ORDER BY l.data ASC")
 	List<Lezione> searchByDopoData(LocalDate data);
+	
+	@Query("SELECT l FROM Lezione l WHERE l.data = :data ORDER BY l.data ASC")
+	List<Lezione> searchByData(LocalDate data);
 }
