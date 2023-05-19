@@ -2,6 +2,8 @@ package org.vm93.registroelettronico.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -32,6 +34,7 @@ public class Plesso {
     private String name;
     
     @OneToMany(mappedBy = "plesso")
+    @JsonIgnore
     private List<Corso> corsi;
 	
 }

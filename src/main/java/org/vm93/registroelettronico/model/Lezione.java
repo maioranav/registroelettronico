@@ -40,7 +40,7 @@ public class Lezione {
     @Column(nullable=false)
 	private Integer orario;
     
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.MERGE)
 	private List<Studente> presenze;
 	
     
