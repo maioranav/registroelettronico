@@ -30,7 +30,13 @@ public class CorsoController {
 		return new ResponseEntity<>(service.getAllCorsi(pageable), HttpStatus.OK);
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/all")
+	@PreAuthorize("isAuthenticated()")
+	public ResponseEntity<?> getAllList() {
+		return new ResponseEntity<>(service.getAllCorsi(), HttpStatus.OK);
+	}
+	
+	@GetMapping("/id/{id}")
 	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<?> getRandom(@PathVariable Long id) {
 		return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
@@ -46,7 +52,7 @@ public class CorsoController {
 		return new ResponseEntity<>(service.updateCorso(c), HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/id/{id}")
 	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<?> deleteById(@PathVariable Long id) {
 		return new ResponseEntity<String>(service.deleteCorso(id), HttpStatus.OK);
