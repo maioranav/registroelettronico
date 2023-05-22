@@ -59,7 +59,7 @@ public class StudenteController {
 		return new ResponseEntity<>(service.updateStudente(s), HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/id/{id}")
 	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<?> deleteById(@PathVariable Long id) {
 		return new ResponseEntity<String>(service.deleteStudente(id), HttpStatus.OK);

@@ -66,7 +66,7 @@ public class MessaggioController {
 		return new ResponseEntity<>(service.updateMessaggio(c), HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/id/{id}")
 	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<?> deleteById(@PathVariable Long id) {
 		return new ResponseEntity<String>(service.deleteMessaggio(id), HttpStatus.OK);
