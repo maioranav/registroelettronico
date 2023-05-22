@@ -17,6 +17,7 @@ import org.vm93.registroelettronico.auth.payload.JWTAuthResponse;
 import org.vm93.registroelettronico.auth.payload.LoginDto;
 import org.vm93.registroelettronico.auth.payload.RegisterDto;
 import org.vm93.registroelettronico.auth.repository.UserRepository;
+import org.vm93.registroelettronico.auth.service.AdminService;
 import org.vm93.registroelettronico.auth.service.AuthService;
 import org.vm93.registroelettronico.model.Docente;
 
@@ -34,6 +35,9 @@ public class AuthController {
 
 	@Autowired
 	UserRepository userRepo;
+	
+	@Autowired
+	AdminService adminService;
 
 	public AuthController(AuthService authService) {
 		this.authService = authService;
@@ -58,9 +62,11 @@ public class AuthController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		User usercomplete = userRepo.findByEmail(auth.getName()).get();
 		return new ResponseEntity<>(usercomplete, HttpStatus.OK);
-		
-
-		
+	}
+	
+	@GetMapping("/firstboot")
+	public ResponseEntity<?> firstBoot() {
+		return new ResponseEntity<>(adminService.salvaAdmin(), HttpStatus.CREATED);
 	}
 
 }

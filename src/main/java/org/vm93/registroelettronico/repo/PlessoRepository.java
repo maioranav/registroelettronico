@@ -9,4 +9,6 @@ public interface PlessoRepository extends CrudRepository<Plesso, Long>, PagingAn
 
 	@Query("SELECT p FROM Plesso p ORDER BY RANDOM() LIMIT 1")
 	public Plesso getRandom();
+	
+	public boolean existsById(Long id);
 }
