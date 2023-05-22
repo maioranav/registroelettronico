@@ -1,5 +1,7 @@
 package org.vm93.registroelettronico.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,13 +33,19 @@ public class DocenteController {
 		return new ResponseEntity<Page<Docente>>(service.getAllDocenti(pageable), HttpStatus.OK);
 	}
 	
+	@GetMapping("/all")
+	@PreAuthorize("isAuthenticated()")
+	public ResponseEntity<?> getAll() {
+		return new ResponseEntity<List<Docente>>(service.getAllDocenti(), HttpStatus.OK);
+	}
+	
 	@GetMapping("/random")
 	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<?> getRandom() {
 		return new ResponseEntity<>(service.getRandom(), HttpStatus.OK);
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/id/{id}")
 	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<?> getRandom(@PathVariable Long id) {
 		return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
@@ -53,7 +61,7 @@ public class DocenteController {
 		return new ResponseEntity<>(service.updateDocente(d), HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/id/{id}")
 	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<?> deleteById(@PathVariable Long id) {
 		return new ResponseEntity<String>(service.deleteDocente(id), HttpStatus.OK);

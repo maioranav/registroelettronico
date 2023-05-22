@@ -3,6 +3,7 @@ package org.vm93.registroelettronico.model;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -24,6 +25,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data @Builder
+@JsonIgnoreProperties(value = {"docente"}, allowSetters = true)
 public class Corso {
 
     @Id
@@ -36,7 +38,6 @@ public class Corso {
 	private Plesso plesso;
 	
     @ManyToOne
-    @JsonIgnore
 	private Docente docente;
     
     @ManyToMany(mappedBy = "corso", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
@@ -47,7 +48,7 @@ public class Corso {
     @JsonIgnore
 	private List<Studente> studenti;
     
-    @OneToMany(mappedBy= "corso", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy= "corso", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JsonIgnore
     private List<Messaggio> messaggi;
 	

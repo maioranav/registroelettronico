@@ -1,5 +1,7 @@
 package org.vm93.registroelettronico.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -26,6 +28,10 @@ public class DocenteService {
 	
 	public Page<Docente> getAllDocenti(Pageable pageable) {
 		return (Page<Docente>) repo.findAll(pageable);
+	}
+	
+	public List<Docente> getAllDocenti() {
+		return (List<Docente>) repo.findAll();
 	}
 	
 	public void generaFakeDocente() {

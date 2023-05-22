@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.vm93.registroelettronico.auth.entity.User;
 import org.vm93.registroelettronico.model.Corso;
 import org.vm93.registroelettronico.model.Docente;
 import org.vm93.registroelettronico.model.Plesso;
@@ -18,8 +19,10 @@ import org.vm93.registroelettronico.repo.PlessoRepository;
 
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 public class CorsoService {
 
 	@Autowired CorsoRepository repo;
@@ -49,9 +52,8 @@ public class CorsoService {
 		if (c.getId() == null && !repo.existsById(c.getId())) {
 			throw new EntityExistsException("Non puoi aggiornare questo Corso (non esiste o non hai fornito un id valido");
 		}
+		log.info("Salvo questo:" + c.getDocente().getName());
 		Plesso p = plessorepo.findById(c.getPlesso().getId()).get();
-		Docente d = repo.findById(c.getId()).get().getDocente();
-		c.setDocente(d);
 		c.setPlesso(p);
 		repo.save(c);
 		return c;

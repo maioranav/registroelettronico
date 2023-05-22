@@ -32,12 +32,12 @@ public class Messaggio {
     @Column(nullable = false, columnDefinition="TEXT")
     private String msg;
     
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	private Docente docente;
     
     @Column(nullable = false)
     private LocalDate data;
     
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.EAGER)
 	private Corso corso;
 }
