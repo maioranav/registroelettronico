@@ -38,7 +38,7 @@ public class StudenteController {
 		return new ResponseEntity<>(service.getRandom(), HttpStatus.OK);
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/id/{id}")
 	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<?> getRandom(@PathVariable Long id) {
 		return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
