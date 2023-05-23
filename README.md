@@ -7,4 +7,4 @@ Configurare il file application.properties con i relativi dati personalizzati (d
 
 Effettuare successivamente una chiamata GET all'endpoint nomehost:porta/api/auth/firstboot
 
-Se si ottengono indietro un'entità User con StatusCode 401, si possono utilizzare i dati forniti per il login
+Se si ottengono indietro un'entità User con StatusCode 201, si possono utilizzare i dati forniti per il login
