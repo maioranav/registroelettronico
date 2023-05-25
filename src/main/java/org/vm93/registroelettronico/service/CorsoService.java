@@ -15,6 +15,7 @@ import org.vm93.registroelettronico.model.Docente;
 import org.vm93.registroelettronico.model.Plesso;
 import org.vm93.registroelettronico.model.Studente;
 import org.vm93.registroelettronico.repo.CorsoRepository;
+import org.vm93.registroelettronico.repo.DocenteRepository;
 import org.vm93.registroelettronico.repo.PlessoRepository;
 
 import jakarta.persistence.EntityExistsException;
@@ -27,6 +28,7 @@ public class CorsoService {
 
 	@Autowired CorsoRepository repo;
 	@Autowired PlessoRepository plessorepo;
+	@Autowired DocenteRepository docenteRepo;
 	@Autowired @Qualifier("fakeCorso") private ObjectProvider<Corso> corsofakeprov;
 	
 	public Page<Corso> getAllCorsi(Pageable pageable) {
@@ -76,6 +78,14 @@ public class CorsoService {
 	
 	public Corso getRandom() {
 		return repo.getRandom();
+	}
+	
+	public List<Corso> findByDocente(Long id){
+		if (!docenteRepo.existsById(id)) {
+			throw new EntityNotFoundException("L'id inserito non esiste");
+		}
+		Docente d = docenteRepo.findById(id).get();
+		return repo.findByDocente(d);
 	}
 	
 }

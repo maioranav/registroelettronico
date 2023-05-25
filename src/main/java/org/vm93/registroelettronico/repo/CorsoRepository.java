@@ -1,5 +1,7 @@
 package org.vm93.registroelettronico.repo;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -11,5 +13,7 @@ public interface CorsoRepository extends PagingAndSortingRepository<Corso, Long>
 	
 	@Query("SELECT c FROM Corso c ORDER BY RANDOM() LIMIT 1")
 	public Corso getRandom();
+	
+	public List<Corso> findByDocente(Docente docente);
 	
 }
