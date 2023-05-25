@@ -52,6 +52,11 @@ public class CorsoController {
 		return new ResponseEntity<>(service.updateCorso(c), HttpStatus.OK);
 	}
 	
+	@GetMapping("/docente/{id}")
+	public ResponseEntity<?> findByDocente(@PathVariable Long id){
+		return new ResponseEntity<>(service.findByDocente(id), HttpStatus.OK);
+	}
+	
 	@DeleteMapping("/id/{id}")
 	@PreAuthorize("isAuthenticated()")
 	public ResponseEntity<?> deleteById(@PathVariable Long id) {
