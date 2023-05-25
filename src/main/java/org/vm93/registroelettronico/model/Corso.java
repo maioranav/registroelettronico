@@ -44,7 +44,7 @@ public class Corso {
     @JsonIgnore
 	private List<Lezione> lezioni;
 	
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "corsi", fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
     @JsonIgnore
 	private List<Studente> studenti;
     

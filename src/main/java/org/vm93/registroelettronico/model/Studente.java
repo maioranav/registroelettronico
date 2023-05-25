@@ -7,6 +7,7 @@ import org.vm93.registroelettronico.auth.entity.User;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -25,7 +26,7 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(value={"password", "roles", "lezioni"}, allowSetters= true)
 public class Studente extends User {
 
-	@ManyToMany(mappedBy = "studenti" ,fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
 	private List<Corso> corsi;
 	
 	@ManyToMany(mappedBy = "presenze",fetch = FetchType.LAZY)

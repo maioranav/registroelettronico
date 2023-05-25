@@ -13,6 +13,7 @@ import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,7 +28,7 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(value={"password", "roles"}, allowSetters= true)
 public class Docente extends User {
 	
-	@ManyToMany(mappedBy = "docente", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "docente", fetch = FetchType.LAZY)
 	private List<Corso> corsi;
 
 }
