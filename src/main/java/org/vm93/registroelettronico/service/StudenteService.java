@@ -54,10 +54,11 @@ public class StudenteService {
 			throw new EntityExistsException("Non puoi aggiornare questo Studente (non esiste o non hai fornito un id valido.)");
 		}
 		if (d.getPassword() == null) {
-			throw new EntityExistsException("Non puoi aggiornare questo Studente se non fornisci una password");
-		}
+			d.setPassword(repo.findById(d.getId()).get().getPassword());
+		} else {
 		PasswordEncoder pe = new BCryptPasswordEncoder();
 		d.setPassword(pe.encode(d.getPassword()));
+		}
 		repo.save(d);
 		return d;
 	}
