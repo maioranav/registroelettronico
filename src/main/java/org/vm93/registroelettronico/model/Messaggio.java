@@ -32,7 +32,7 @@ public class Messaggio {
     @Column(nullable = false, columnDefinition="TEXT")
     private String msg;
     
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @OneToOne(fetch = FetchType.EAGER)
 	private Docente docente;
     
     @Column(nullable = false)
