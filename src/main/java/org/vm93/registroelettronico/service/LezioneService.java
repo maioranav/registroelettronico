@@ -15,6 +15,7 @@ import org.vm93.registroelettronico.model.Lezione;
 import org.vm93.registroelettronico.model.Studente;
 import org.vm93.registroelettronico.repo.CorsoRepository;
 import org.vm93.registroelettronico.repo.LezioneRepo;
+import org.vm93.registroelettronico.repo.StudenteRepository;
 
 import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
@@ -25,6 +26,7 @@ public class LezioneService {
 	
 	@Autowired LezioneRepo repo;
 	@Autowired CorsoRepository corsirepo;
+	@Autowired StudenteRepository studenterepo;
 	@Autowired @Qualifier("lezioneFake") private ObjectProvider<Lezione> lezionefakeprov;
 	
 	public Page<Lezione> getAllLezioni(Pageable pageable) {
@@ -46,6 +48,11 @@ public class LezioneService {
 		if (c.getId() == null && !repo.existsById(c.getId())) {
 			throw new EntityExistsException("Non puoi aggiornare questa Lezione (non esiste o non hai fornito un id valido");
 		}
+		List<Long> idPresenti = new ArrayList<>(); 
+		c.getPresenze().forEach(el -> idPresenti.add(el.getId()));
+		List<Studente> presenze = new ArrayList<>();
+		idPresenti.forEach(el -> presenze.add(studenterepo.findById(el).get()));
+		c.setPresenze(presenze);
 		repo.save(c);
 		return c;
 	}
