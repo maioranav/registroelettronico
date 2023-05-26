@@ -80,7 +80,8 @@ public class LezioneService {
 	}
 	
 	public List<Lezione> getByCorsieData(List<Corso> c, LocalDate d) {
-		return (List<Lezione>) repo.searchByCorsoEDopoData(c, d);
+		LocalDate dcorr = d.minusDays(1);
+		return (List<Lezione>) repo.searchByCorsoEDopoData(c, dcorr);
 	}
 	
 	public List<Lezione> getByCorsieDataEsatta(List<Corso> c, LocalDate d) {
@@ -88,7 +89,8 @@ public class LezioneService {
 	}
 	
 	public List<Lezione> getByDopoData(LocalDate d) {
-		return (List<Lezione>) repo.searchByDopoData(d);
+		LocalDate dcorr = d.minusDays(1);
+		return (List<Lezione>) repo.searchByDopoData(dcorr);
 	}
 	
 	public List<Lezione> getByData(LocalDate d) {

@@ -30,7 +30,7 @@ public interface LezioneRepo extends PagingAndSortingRepository<Lezione, Long>, 
 	@Query("SELECT l FROM Lezione l WHERE l.data = :data ORDER BY l.data ASC")
 	List<Lezione> searchByData(LocalDate data);
 	
-	@Query("SELECT l FROM Lezione l WHERE l.data BETWEEN :endDate AND :startDate ORDER BY l.data ASC")
+	@Query("SELECT l FROM Lezione l WHERE l.data BETWEEN :endDate AND :startDate ORDER BY l.data, l.orario ASC")
 	List<Lezione> search7daysBefore(LocalDate startDate, LocalDate endDate);
 	
 	@Query("SELECT l FROM Lezione l WHERE l.corso IN :corsi AND l.data BETWEEN :endDate AND :startDate ORDER BY l.data ASC")
