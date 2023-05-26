@@ -1,11 +1,12 @@
 # Registro Elettronico Universitatio RESTAPI
+
 Registro Elettronico Universitatio RestAPI basato su Java Spring-Boot
 
 ## PRIMA DI INIZIARE
 
 Configurare il file application.properties con i relativi dati personalizzati (dati dell'amministratore, dati di connessione al DB)
 
-Effettuare successivamente una chiamata GET all'endpoint http://nomehost:porta/api/auth/firstboot
+Effettuare successivamente una chiamata GET all'endpoint https://nomehost:porta/api/auth/firstboot
 
 Se si ottengono indietro un'entità User con StatusCode 201, si possono utilizzare i dati forniti per il login
 
@@ -13,11 +14,11 @@ Se si ottengono indietro un'entità User con StatusCode 201, si possono utilizza
 
 Gli endpoint sono tutti documentati tramite OpenAPI e Swagger.
 
-Possono essere consultati in formato JSON tramite una richiesta GET a http://nomehost:porta/api/docs 
+Possono essere consultati in formato JSON tramite una richiesta GET a https://nomehost:porta/api/docs
 
 oppure
 
-consultando http://nomehost:porta/api/swagger-ui.html da browser web.
+consultando https://nomehost:porta/api/swagger-ui.html da browser web.
 
 ## AUTHENTICATION
 
@@ -31,3 +32,14 @@ E' disponibile un'interfaccia FrontEnd, progettata in concomitanza con questo AP
 
 Consulta il mio Git --> https://github.com/maioranav/registroelettronicofe
 
+## SSL
+
+Il Software gestisce SOLO chiamate HTTPs (potrebbe essere necessario autorizzare i certificati self-signed sul tuo sistema operativo/browser).
+
+All'interno della cartella [resources] è presente un certificato pre-installato di prova.
+
+- keytool -genkeypair -alias springboot -keyalg RSA -keysize 4096 -storetype JKS -keystore springboot.jks -validity 3650 -storepass password
+
+- keytool -genkeypair -alias springboot -keyalg RSA -keysize 4096 -storetype PKCS12 -keystore springboot.p12 -validity 3650 -storepass password
+
+Fonte: https://www.thomasvitale.com/https-spring-boot-ssl-certificate/
