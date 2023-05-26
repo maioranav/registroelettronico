@@ -18,3 +18,16 @@ Possono essere consultati in formato JSON tramite una richiesta GET a http://nom
 oppure
 
 consultando http://nomehost:porta/api/swagger-ui.html da browser web.
+
+## AUTHENTICATION
+
+Tutti gli endpoint sono protetti da Autenticazione JWT Based, e Ruoli (Admin, Docente, Studente).
+
+Le documentazioni sono consultabili senza autenticazione, in caso di utilizzo in Produzione vanno preventivamente disabilitati o filtrati.
+
+## USER INTERFACE
+
+E' disponibile un'interfaccia FrontEnd, progettata in concomitanza con questo API in occasione del Capstone Project di EPICODE.
+
+Consulta il mio Git --> https://github.com/maioranav/registroelettronicofe
+
