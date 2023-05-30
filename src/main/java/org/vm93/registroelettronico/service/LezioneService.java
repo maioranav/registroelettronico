@@ -3,6 +3,7 @@ package org.vm93.registroelettronico.service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.vm93.registroelettronico.model.Corso;
+import org.vm93.registroelettronico.model.Docente;
 import org.vm93.registroelettronico.model.Lezione;
 import org.vm93.registroelettronico.model.Studente;
 import org.vm93.registroelettronico.repo.CorsoRepository;
@@ -22,6 +24,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 public class LezioneService {
 	
 	@Autowired LezioneRepo repo;
@@ -48,13 +51,14 @@ public class LezioneService {
 		if (c.getId() == null && !repo.existsById(c.getId())) {
 			throw new EntityExistsException("Non puoi aggiornare questa Lezione (non esiste o non hai fornito un id valido");
 		}
+		Lezione lezionedadb = repo.findById(c.getId()).get();
 		List<Long> idPresenti = new ArrayList<>(); 
 		c.getPresenze().forEach(el -> idPresenti.add(el.getId()));
 		List<Studente> presenze = new ArrayList<>();
 		idPresenti.forEach(el -> presenze.add(studenterepo.findById(el).get()));
-		c.setPresenze(presenze);
-		repo.save(c);
-		return c;
+		lezionedadb.setPresenze(presenze);
+		repo.save(lezionedadb);
+		return lezionedadb;
 	}
 	
 	public Lezione findById(Long id) {
