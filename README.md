@@ -43,3 +43,7 @@ All'interno della cartella [resources] è presente un certificato pre-installato
 - keytool -genkeypair -alias springboot -keyalg RSA -keysize 4096 -storetype PKCS12 -keystore springboot.p12 -validity 3650 -storepass password
 
 Fonte: https://www.thomasvitale.com/https-spring-boot-ssl-certificate/
+
+## NOTE
+
+Alcune unità essenziali sono state testate con la suite di JUnit 5, potrebbe quindi essere necessario, in base al vostro IDE, importare nel classpath le suddette unità di test come libreria aggiuntiva.
